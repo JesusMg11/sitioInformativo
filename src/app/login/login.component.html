@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row" style="text-align:center;font-size: large;">
+        <div class="col-xs-2"></div>
+
+        <div class="col-xs-8">
+            <form id="form_login">
+                <img src="../../assets/imagenes/logo.png" />
+                <hr>
+                <!-- Usuario -->
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example1"><i class="fas fa-user"></i> Usuario</label>
+                    <input style="background-color: rgb(233, 227, 227);" type="text" id="form2Example1" [(ngModel)]="datosUsuario.usuario" class="form-control" name="usuario" required/>
+                   <!-- <label class="form-label" for="form2Example1"><i class="fas fa-user"></i> Usuario</label> -->
+                </div>
+                <hr>
+                <!-- Contraseña -->
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example2"><i class="fas fa-key"></i> Contraseña</label>
+                    <input style="background-color: rgb(233, 227, 227);" type="password" id="form2Example2" [(ngModel)]="datosUsuario.password" class="form-control" name="password" required/>
+                   <!-- <label class="form-label" for="form2Example2"><i class="fas fa-key"></i> Contraseña</label> -->
+                </div>
+                <hr>
+                <!-- Ingresar -->
+                <button type="submit" class="btn btn-success btn-block mb-4" (click)="login()">Ingresar</button>
+
+            </form>
+        </div>
+
+        <div class="col-xs-2"></div>
+    </div>
+</div>
+
+<style type="text/css">
+    #form_login {
+    left      : 50%;
+    top       : 40%;
+    position  : absolute;
+    transform : translate(-50%, -50%);
+}
+</style>

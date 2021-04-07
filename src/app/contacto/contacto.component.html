@@ -1,0 +1,42 @@
+<app-menu></app-menu>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+
+        <div class="col-sm-8">
+        <div class="card text-center">
+            <div class="card-header" style="font-size: 20px;">Contacto</div>
+            <div class="card-body">
+              <!--FORM DE MENSAJE-->
+              <form>
+                <!-- Nombre input -->
+                <div class="form-outline mb-4">
+                  <input style="background-color: rgb(233, 227, 227);" type="text" id="form4Example1" class="form-control" [(ngModel)]="nuevoMensaje.nombre" name="nombre" required/>
+                  <label class="form-label" for="form4Example1">Nombre</label>
+                </div>
+              
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input style="background-color: rgb(233, 227, 227);" type="email" id="form4Example2" class="form-control" [(ngModel)]="nuevoMensaje.correo" name="correo" required/>
+                  <label class="form-label" for="form4Example2">Correo Electrónico</label>
+                </div>
+              
+                <!-- Mensaje input -->
+                <div class="form-outline mb-4">
+                  <textarea style="background-color: rgb(233, 227, 227);" class="form-control" placeholder="Máximo 500 caractéres." id="form4Example3" 
+                    minlength="15" maxlength="500" rows="4" [(ngModel)]="nuevoMensaje.mensaje" name="mensaje" required></textarea>
+                  <label class="form-label" for="form4Example3">Mensaje</label>
+                </div>
+              
+                <!-- Enviar button -->
+                <button type="submit" class="btn btn-success btn-block mb-4" (click)="agregar()">Enviar</button>
+              </form>
+              <!--FIN FORM-->
+            </div>
+            <div class="card-footer text-muted"></div>
+          </div>
+          </div>
+
+          <div class="col-sm-2"></div>
+    </div>
+</div>
