@@ -20,10 +20,13 @@ export class MenuAdminComponent implements OnInit {
   mensajes(){
     this.router.navigate(['/mensajes']);
   }
+  inicioAd(){
+    this.router.navigate(['/inicioAd']);
+  }
 
   //log out
   salir(){
-    this.datos.setCuenta("","","","","");
+    this.datos.setCuenta("","","","","","");
     this.router.navigate(["/inicioSesion"]);
     swal.fire({
       imageUrl: "../../assets/imagenes/waving-hand.png",
@@ -34,7 +37,7 @@ export class MenuAdminComponent implements OnInit {
       timer: 3000
     })
   }
-
+W
   constructor(private router:Router, private datos: DatosService) { }
 
   ngOnInit(): void {

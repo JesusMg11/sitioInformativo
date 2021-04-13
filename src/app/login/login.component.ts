@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     if(this.datosUsuario.usuario != '' || this.datosUsuario.usuario!= ''){
       this.datos.login(this.datosUsuario.usuario, this.datosUsuario.password).subscribe(resp => {
          if(resp['auth']=='si'){
-          this.datos.setCuenta(resp['id'], resp['nombre'], resp['apellidos'], resp['usuario'], resp['rol']);
+          this.datos.setCuenta(resp['id'], resp['nombre'], resp['apellidos'], resp['usuario'], resp['rol'], resp['token']);
           swal.fire({
             icon: 'success',
             title: '¡Bienvenido!',

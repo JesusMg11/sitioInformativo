@@ -22,6 +22,9 @@ export class MenuComponent implements OnInit {
   contacto(){
     this.router.navigate(['/contacto']);
   }
+  ingresar(){
+    this.router.navigate(['/inicioSesion']);
+  }
 
   constructor(private router:Router, private datos: DatosService) { }
 

@@ -11,7 +11,7 @@ export class DatosService {
 
   constructor(private http: HttpClient, private galleta:CookieService) { }
 
-  private usuarioActivo = {id:"", nombre:"", apellidos:"", usuario:"", rol:""};
+  private usuarioActivo = {id:"", nombre:"", apellidos:"", usuario:"", rol:"", token:""};
 
   login(u, p){
     let Params = new HttpParams();
@@ -40,18 +40,20 @@ export class DatosService {
     return this.http.post(URL + "mensajes.php", formData);
   }
 
-  setCuenta(id, nombre, apellidos, usuario, rol){
+  setCuenta(id, nombre, apellidos, usuario, rol, token){
     this.usuarioActivo.id = id;
     this.usuarioActivo.nombre = nombre;
     this.usuarioActivo.apellidos = apellidos;
     this.usuarioActivo.usuario = usuario;
     this.usuarioActivo.rol = rol;
+    this.usuarioActivo.token = token;
 
     this.galleta.set('id',id);
     this.galleta.set('nombre',nombre);
     this.galleta.set('apellidos',apellidos);
     this.galleta.set('usuario',usuario);
     this.galleta.set('rol',rol);
+    this.galleta.set('token',token);
   }
 
   getCuenta(){
@@ -69,9 +71,64 @@ export class DatosService {
     return this.http.get(URL + 'usuarios.php', {params: Params});
   }
 
+  obtenerUsuarioEspecifico(id){
+    let Params = new HttpParams();
+    Params = Params.append('user', id);
+    return this.http.get(URL + 'usuarios.php', {params: Params});
+  }
+
   obtenerMensajes(){
     let Params = new HttpParams();
     Params = Params.append('id', "0");
     return this.http.get(URL + 'mensajes.php', {params: Params});
+  }
+
+  actualizarUsuario(usuario){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.usuarioActivo.token);
+
+    let Params = new HttpParams();
+    Params = Params.append('id_us', usuario.id_usu);
+    Params = Params.append('nombre', usuario.nombre_usu);
+    Params = Params.append('apellidos', usuario.apellidos_usu);
+    Params = Params.append('rol', usuario.rol_usu);
+    Params = Params.append('usuario', usuario.usuario_usu);
+    return this.http.put(URL + "usuarios.php",null, {headers: Headers, params: Params});
+  }
+
+  actualizarContra(usuario){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.usuarioActivo.token);
+
+    let Params = new HttpParams();
+    Params = Params.append('id_us', usuario.id_usu);
+    Params = Params.append('contra', usuario.contra_usu);
+    return this.http.put(URL + "usuarios.php",null, {headers: Headers, params: Params});
+  }
+
+  eliminarUsuario(id){
+    console.log(this.usuarioActivo);
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.usuarioActivo.token);
+    let Params = new HttpParams();
+    Params = Params.append('id_us',id);
+
+    return this.http.delete(URL + "usuarios.php", {headers: Headers, params: Params});
+  }
+
+  obtenerPropuestas(){
+    let Params = new HttpParams();
+    Params = Params.append('id', "0");
+    return this.http.get(URL + 'propuestas.php', {params: Params});
+  }
+
+  agregarPropuesta(propuesta){
+    let formData = new FormData();
+    console.log("DATOS A MANDAR AL SERVICIO: "+propuesta.titulo+", "+propuesta.propuesta+", "+propuesta.imagen);
+    formData.append('titulo', propuesta.titulo);
+    formData.append('propuesta', propuesta.propuesta);
+    formData.append('imagen', propuesta.imagen);
+
+    return this.http.post(URL + "propuestas.php", formData);
   }
 }

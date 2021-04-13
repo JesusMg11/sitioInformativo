@@ -1,2 +1,83 @@
 <app-menu-admin></app-menu-admin>
-<p>propuestas-admin works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4" style="text-align: center;">
+            <h2>Propuestas</h2>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+
+    <div class="row">
+        <!-- Button trigger modal -->
+        <div style="text-align: right">
+            <button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                <i class="fas fa-envelope"></i> Agregar </button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <!--Propuestas-->
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered order-table">
+                <thead class="table-active">
+                    <tr>
+                        <th style="font-weight: bold;">Titulo</th>
+                        <th style="font-weight: bold;">Propuesta</th>
+                        <th style="font-weight: bold;">Imagen</th>
+                        <th style="font-weight: bold;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of propuesta" style="color: black;">
+                        <td>{{item.titulo_pro}}</td>
+                        <td>{{item.propuesta_pro}}</td>
+                        <td></td>
+                        <td  style="text-align: center;">
+                            <button class="btn btn-primary btn-md" (click) = "datosEditar(item)"
+                            data-mdb-toggle="modal" data-mdb-target='#editarUsuarioModal' title="Editar"><i class="fas fa-user-edit"></i></button>
+                            &nbsp;
+                            <button *ngIf = "nivel == 'A' " class="btn btn-danger btn-md" (click)="datosEliminar(item.id_usu)" 
+                            data-mdb-toggle='modal' data-mdb-target='#modalEliminar' title="Eliminar"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Agregar Propuesta-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Propuesta</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-label mb-4">
+                        <input type="text" class="form-control" placeholder="Título" 
+                            [(ngModel)]="nuevaPropuesta.titulo"  name="titulo" required/>
+                    </div>
+                    <div class="form-label mb-4">
+                        <textarea class="form-control" placeholder="Propuesta. Máximo 1000 caractéres." 
+                    minlength="15" maxlength="500" rows="5" [(ngModel)]="nuevaPropuesta.propuesta" name="propuesta" required></textarea>
+                    </div>
+                    <div class="form-label mb-4">
+                        <label>Imagen</label>
+                        <input id="imagen" name="imagen" type="file" [(ngModel)]="nuevaPropuesta.imagen" class="form-control" accept="image/*" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-error" data-mdb-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-success" (click)="agregar()">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Fin Modal Agregar Usuario-->
