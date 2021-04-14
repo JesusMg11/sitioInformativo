@@ -50,7 +50,7 @@ const rutas: Route[] = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(rutas),
+    RouterModule.forRoot(rutas, { useHash: true }),
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule

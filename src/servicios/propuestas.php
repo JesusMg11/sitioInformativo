@@ -5,7 +5,9 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, HEAD");
 header("Allow: GET, POST, PUT, DELETE, OPTIONS, HEAD");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header('Access-Control-Allow-Credentials: true');
+header('Content-Type: multipart/form-data');
 require_once 'database.php';
+//error_reporting(0);
 $tabla = new DataBase('propuestas');
 switch($_SERVER['REQUEST_METHOD']){
     case "GET":
@@ -19,17 +21,18 @@ switch($_SERVER['REQUEST_METHOD']){
         echo json_encode($res);
     break;
     case "POST":
-        if(isset($_POST['titulo']) && isset($_POST['propuesta']) && isset($_POST['imagen'])){
-            $imagen = base64_encode(file_get_contents($_POST['imagen']['tmp_name']));
-            echo $_POST['imagen'];
+        if(isset($_POST['titulo']) && isset($_POST['propuesta']) && isset($_FILES['imagen'])){
+            $imagen = base64_encode(file_get_contents($_FILES['imagen']['tmp_name']));
+            $tipo = $_FILES['imagen']['type'];
             if(empty($imagen)){
                 $res = array("result"=>"no","msg"=>"Falta la imagen");
             }else{
                 $datos = array(
                     'id_pro' => 0,
-                    'propuesta_pro'=> $_POST['nombre'],
+                    'propuesta_pro'=> $_POST['propuesta'],
                     'imagen_pro'=> $imagen,
-                    'titulo_pro'=> $_POST['usuario'],
+                    'titulo_pro'=> $_POST['titulo'],
+                    'tipo_img_pro' => $tipo
                     );
                    try{
                       $reg = $tabla->create($datos);
@@ -38,38 +41,46 @@ switch($_SERVER['REQUEST_METHOD']){
                     $res = array("result"=>"no","msg"=>$e->getMessage());
                    }
             }
-        }else{
+        }else 
+        //Actualizar imagen
+        if(isset($_FILES['imagenActu']) && isset($_POST['id_pro']) && isset($_POST['titulo']) && isset($_POST['propuesta'])){
+            $imagen = base64_encode(file_get_contents($_FILES['imagenActu']['tmp_name']));
+            $tipo = $_FILES['imagenActu']['type'];
+            if(empty($imagen)){
+                $res = array("result"=>"no","msg"=>"Falta la imagen");
+            }else{
+                $datos = array(
+                    'propuesta_pro'=> $_POST['propuesta'],
+                    'titulo_pro'=> $_POST['titulo'],
+                    'imagen_pro'=> $imagen,
+                    'tipo_img_pro' => $tipo
+                    );
+                   try{
+                    $where = array('id_pro'=>$_POST['id_pro']);
+                    $reg = $tabla->update($datos,$where);
+                    $res = array("result"=>"ok","msg"=>"Se actualizó la propuesta con img", "num"=>$reg);
+                   }catch(PDOException $e){
+                    $res = array("result"=>"no","msg"=>$e->getMessage());
+                   }
+            }
+        }
+        else{
             $res = array("result"=>"no","msg"=>"Faltan datos");
         }
         header("HTTP/1.1 200 OK");
         echo json_encode($res);
     break;
     case "PUT":
-        //Actualizar datos del usuario
-        if(isset($_GET['id_us']) && isset($_GET['nombre']) && isset($_GET['apellidos']) && isset($_GET['rol']) && isset($_GET['usuario'])){
-            $datos = array(
-                'id_usu' => $_GET['id_us'],
-                'nombre_usu'=> strtoupper ( $_GET['nombre']),
-                'apellidos_usu'=> strtoupper ( $_GET['apellidos']),
-                'usuario_usu'=> ($_GET['usuario']),
-                'rol_usu'=>$_GET['rol'],
-            );
-            $where = array('id_usu'=>$_GET['id_us']);
-            $reg = $tabla->update($datos,$where);
-            $res = array("result"=>"ok","msg"=>"Se actualizó el usuario", "num"=>$reg);
-        }else
-        //Actualizar contraseña del usuario
-        if(isset($_GET['id_us']) && isset($_GET['contra']) ){
-            $pass_hash = password_hash($_GET['contra'], PASSWORD_DEFAULT);
-            $datos = array(
-                'id_usu' => $_GET['id_us'],
-                'contra_usu'=>$pass_hash
-            );
-            $where = array('id_usu'=>$_GET['id_us']);
-            $reg = $tabla->update($datos,$where);
-            $res = array("result"=>"ok","msg"=>"Se actualizó la contraseña", "num"=>$reg);
+        //Actualizar datos del la propuesta
+        if(isset($_GET['id_pro']) && isset($_GET['titulo']) && isset($_GET['propuesta'])){
+                $datos = array(
+                    'titulo_pro'=>  $_GET['titulo'],
+                    'propuesta_pro'=>  $_GET['propuesta']
+                );
+                $where = array('id_pro'=>$_GET['id_pro']);
+                $reg = $tabla->update($datos,$where);
+                $res = array("result"=>"ok","msg"=>"Se actualizó la propuesta sin img", "num"=>$reg);
         }
-        
         else{
             $res = array("result"=>"no","msg"=>"Faltan datos");
         }
@@ -77,10 +88,10 @@ switch($_SERVER['REQUEST_METHOD']){
         echo json_encode($res);
     break;
     case "DELETE":
-        if(isset($_GET['id_us'])){
-            $where = array('id_usu'=>$_GET['id_us']);
+        if(isset($_GET['id_pro'])){
+            $where = array('id_pro'=>$_GET['id_pro']);
             $reg = $tabla->delete($where);
-            $res = array("result"=>"ok","msg"=>"Se elimino el usuario", "num"=>$reg);
+            $res = array("result"=>"ok","msg"=>"Se elimino la propuesta", "num"=>$reg);
         }else{
             $res = array("result"=>"no","msg"=>"Faltan datos");
         }

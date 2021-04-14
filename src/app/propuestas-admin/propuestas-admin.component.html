@@ -32,12 +32,17 @@
                     <tr *ngFor="let item of propuesta" style="color: black;">
                         <td>{{item.titulo_pro}}</td>
                         <td>{{item.propuesta_pro}}</td>
-                        <td></td>
+                        <td style="text-align: center;"> 
+                            <img  src="data:{{item.tipo_img_pro}};base64,{{item.imagen_pro}}" width="100px"/>
+                        </td>
                         <td  style="text-align: center;">
-                            <button class="btn btn-primary btn-md" (click) = "datosEditar(item)"
-                            data-mdb-toggle="modal" data-mdb-target='#editarUsuarioModal' title="Editar"><i class="fas fa-user-edit"></i></button>
+                            <button class="btn btn-primary btn-md" (click) = "datosEditar(item.id_pro, item.titulo_pro, item.propuesta_pro)"
+                            data-mdb-toggle="modal" data-mdb-target='#editarPropuestaModal' title="Editar"><i class="fas fa-edit"></i></button>
                             &nbsp;
-                            <button *ngIf = "nivel == 'A' " class="btn btn-danger btn-md" (click)="datosEliminar(item.id_usu)" 
+                            <button class="btn btn-warning btn-md" (click)="datosEditar(item.id_pro, item.titulo_pro, item.propuesta_pro)" 
+                            data-mdb-toggle='modal' data-mdb-target='#modalEditarFoto' title="Editar Foto"><i class="fas fa-image"></i></button>
+                            &nbsp;
+                            <button *ngIf = "nivel == 'A' " class="btn btn-danger btn-md" (click)="datosEliminar(item.id_pro)" 
                             data-mdb-toggle='modal' data-mdb-target='#modalEliminar' title="Eliminar"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
@@ -67,7 +72,8 @@
                     </div>
                     <div class="form-label mb-4">
                         <label>Imagen</label>
-                        <input id="imagen" name="imagen" type="file" [(ngModel)]="nuevaPropuesta.imagen" class="form-control" accept="image/*" required>
+                      <!-- <input #inputImg id="imagen" name="imagen" type="file" (change)="onFileChanged($event.target.files)" class="form-control" accept="image/*" required> --> 
+                      <input #inputImg id="imagen" name="imagen" type="file" (change)="onFileChanged($event)" class="form-control" accept="image/*" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -81,3 +87,90 @@
     </div>
 </div>
 <!--Fin Modal Agregar Usuario-->
+
+<!-- Modal Editar Propuesta-->
+<div class="modal fade" id="editarPropuestaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Propuesta</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-label mb-4">
+                        <input type="text" class="form-control" placeholder="Título" 
+                            [(ngModel)]="propuestaTmp.titulo"  name="titulo" required/>
+                    </div>
+                    <div class="form-label mb-4">
+                        <textarea class="form-control" placeholder="Propuesta. Máximo 1000 caractéres." 
+                    minlength="15" maxlength="500" rows="5" [(ngModel)]="propuestaTmp.propuesta" name="propuesta" required></textarea>
+                    </div>
+                   <!--  <div class="form-label mb-4">
+                       <label>Imagen</label>
+                        <input #inputImgEdit id="imagenEdit" name="imagenEdit" type="file" (change)="onFileChangedEdit($event)" class="form-control" accept="image/*">
+                    </div> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-error" data-mdb-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-success" (click)="actualizar()">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Fin Modal Editar Propuesta-->
+
+<!-- Modal Editar Foto-->
+<div class="modal fade" id="modalEditarFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Foto</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-label mb-4">
+                        <label>Imagen</label>
+                        <input #inputImgEdit id="imagenEdit" name="imagenEdit" type="file" (change)="onFileChangedEdit($event)" class="form-control" accept="image/*">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-error" data-mdb-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-success" (click)="actualizar()" data-mdb-dismiss="modal">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Fin Modal Editar Foto-->
+
+<!-- Modal Eliminar Propuesta-->
+<div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Propuesta</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <br>
+                    <p>¿Está seguro que quiere eliminar esta propuesta?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-error" data-mdb-dismiss="modal">
+                        No
+                    </button>
+                    <button type="submit" class="btn btn-success" (click)="eliminar()" data-mdb-dismiss="modal">Sí</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Fin Modal Eliminar Propuesta-->

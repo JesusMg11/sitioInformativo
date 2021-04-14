@@ -26,7 +26,7 @@
                         <th style="font-weight: bold;">Nombre(s)</th>
                         <th style="font-weight: bold;">Apellido(s)</th>
                         <th style="font-weight: bold;">Rol</th>
-                        <th *ngIf = "nivel == 'A' ">Acciones</th>
+                        <th style="font-weight: bold;" *ngIf = "nivel == 'A' ">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,7 +125,7 @@
                     </div>
                     <div class="form-label mb-4">
                         <label style="margin-right: 5px;">Selecciona el Rol:   </label>
-                        <select id="roles" name="rolEditar" [(ngModel)]="usuarioTmp.rol_usu" required>
+                        <select id="rolEditar" name="rolEditar" [(ngModel)]="usuarioTmp.rol_usu" required>
                             <option *ngFor="let valores of roles" [ngValue]="valores.rol">
                                 {{ valores.nombreRol }}
                             </option>
@@ -165,7 +165,7 @@
                     <button type="button" class="btn btn-error" data-mdb-dismiss="modal">
                         Cancelar
                     </button>
-                    <button type="submit" class="btn btn-success" (click)="cambiarContra()">Guardar</button>
+                    <button type="submit" class="btn btn-success" (click)="cambiarContra()" data-mdb-dismiss="modal">Guardar</button>
                 </div>
             </form>
         </div>
@@ -190,7 +190,7 @@
                     <button type="button" class="btn btn-error" data-mdb-dismiss="modal">
                         No
                     </button>
-                    <button type="submit" class="btn btn-success" (click)="eliminar()">Sí</button>
+                    <button type="submit" class="btn btn-success" (click)="eliminar()" data-mdb-dismiss="modal">Sí</button>
                 </div>
             </form>
         </div>

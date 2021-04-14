@@ -107,9 +107,9 @@ export class DatosService {
   }
 
   eliminarUsuario(id){
-    console.log(this.usuarioActivo);
     let Headers = new HttpHeaders();
     Headers = Headers.append('Authorization', this.usuarioActivo.token);
+
     let Params = new HttpParams();
     Params = Params.append('id_us',id);
 
@@ -122,13 +122,42 @@ export class DatosService {
     return this.http.get(URL + 'propuestas.php', {params: Params});
   }
 
-  agregarPropuesta(propuesta){
+  agregarPropuesta(propuesta, img){
     let formData = new FormData();
-    console.log("DATOS A MANDAR AL SERVICIO: "+propuesta.titulo+", "+propuesta.propuesta+", "+propuesta.imagen);
     formData.append('titulo', propuesta.titulo);
     formData.append('propuesta', propuesta.propuesta);
-    formData.append('imagen', propuesta.imagen);
+    formData.append('imagen', img);
 
     return this.http.post(URL + "propuestas.php", formData);
+  }
+
+  actualizarPropuesta(propuesta, img){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.usuarioActivo.token);
+
+    let Params = new HttpParams();
+    Params = Params.append('id_pro', propuesta.id);
+    Params = Params.append('titulo', propuesta.titulo);
+    Params = Params.append('propuesta', propuesta.propuesta);
+    return this.http.put(URL + "propuestas.php",null, {headers: Headers, params: Params,});
+  }
+
+  actualizarImagen(propuesta, img){
+    let formData = new FormData();
+    formData.append('imagenActu', img);
+    formData.append('id_pro', propuesta.id);
+    formData.append('titulo', propuesta.titulo);
+    formData.append('propuesta', propuesta.propuesta);
+    return this.http.post(URL + "propuestas.php", formData);
+  }
+
+  eliminarPropuesta(id){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.usuarioActivo.token);
+    
+    let Params = new HttpParams();
+    Params = Params.append('id_pro',id);
+
+    return this.http.delete(URL + "propuestas.php", {headers: Headers, params: Params});
   }
 }
