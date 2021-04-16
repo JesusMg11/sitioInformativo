@@ -37,7 +37,6 @@ export class MenuAdminComponent implements OnInit {
       timer: 3000
     })
   }
-W
   constructor(private router:Router, private datos: DatosService) { }
 
   ngOnInit(): void {

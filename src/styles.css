@@ -1,2 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/material.theme.css";
+
+a{
+    cursor: pointer;
+}
+#navAdmin, #navUs{
+    background-color: #2E7D32;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.9);
+}
+
+#cardContacto{
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.9);
+    width: 100%;
+}
+
+.card {
+    box-shadow: 1px 9px 10px 1px rgba(0, 0, 0, 0.9);
+    transition: 0.3s;
+    width: 330px;
+    margin: 0 auto;
+    background-color: rgb(239, 239, 239);
+}
+
+.card:hover {
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.9);
+}
+
+html{
+    font-size: large;
+}

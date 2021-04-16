@@ -101,7 +101,9 @@ export class PropuestasAdminComponent implements OnInit {
         this.datos.actualizarImagen(this.propuestaTmp, this.selectedFileEdit).subscribe(resp => {
           if(resp['result']=='ok'){
             this.obtenerPropuestas();
-            this.selectedFileEdit = null;
+            this.nuevaPropuesta.titulo = '';
+            this.nuevaPropuesta.propuesta = '';
+            this.selectedFile = null;
             swal.fire({
               icon: 'success',
               title: '¡Hecho!',
@@ -123,6 +125,9 @@ export class PropuestasAdminComponent implements OnInit {
         this.datos.actualizarPropuesta(this.propuestaTmp, this.selectedFileEdit).subscribe(resp => {
           if(resp['result']=='ok'){
             this.obtenerPropuestas();
+            this.nuevaPropuesta.titulo = '';
+            this.nuevaPropuesta.propuesta = '';
+            this.selectedFile = null;
             swal.fire({
               icon: 'success',
               title: '¡Hecho!',

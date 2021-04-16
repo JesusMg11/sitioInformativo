@@ -1,2 +1,91 @@
 <app-menu-admin></app-menu-admin>
-<p>inicio-admin works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4" style="text-align: center;">
+            <h2>Inicio</h2>
+            <h5>¡Hola de nuevo {{nombre}}!</h5>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+    <hr>
+    <!--FILA #1-->
+    <div class="row">
+        <div class="col-sm-4 mx-auto d-inline p-2">
+            <a class="card" (click)="usuarios()">
+                <div style="text-align:center"><br>
+                    <img src="../../assets/imagenes/usuarios.png" alt="Imagen" style="width:140px;">
+                </div><br>
+                <div class="container" style="color: black;text-align:center">
+                    <h4><b>Usuarios</b></h4>
+                    <p>Revisa los usuarios del sitio.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-sm-4 mx-auto d-inline p-2">
+            <a class="card" (click)="propuestas()">
+                <div style="text-align:center"><br>
+                    <img src="../../assets/imagenes/propuestas.png" alt="Imagen" style="width:140px;">
+                </div><br>
+                <div class="container" style="color: black;text-align:center">
+                    <h4><b>Propuestas</b></h4>
+                    <p>Agrega o edita las propuestas.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-sm-4 mx-auto d-inline p-2">
+            <a class="card" (click)="mensajes()">
+                <div style="text-align:center"><br>
+                    <img src="../../assets/imagenes/mensajes.png" alt="Imagen" style="width:140px;">
+                </div>
+                <div class="container" style="color: black;text-align:center">
+                    <h4><b>Mensajes</b></h4>
+                    <p >Echa un vistazo a la opinión de los ciudadanos.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!--FIN FILA #1-->
+    <br>
+    <!--FILA #2-->
+    <div class="row">
+        <div class="col-sm-4 mx-auto d-inline p-2">
+            <a class="card" (click)="inicioAd()">
+                <div style="text-align:center"><br>
+                    <img src="../../assets/imagenes/inicio.png" alt="Imagen" style="width:140px;">
+                </div><br>
+                <div class="container" style="color: black;text-align:center">
+                    <h4><b>Inicio</b></h4>
+                    <p>Regresa a este panel.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-sm-4 mx-auto d-inline p-2">
+            <a class="card" (click)="salir()">
+                <div style="text-align:center"><br>
+                    <img src="../../assets/imagenes/salir.png" alt="Imagen" style="width:140px;">
+                </div><br>
+                <div class="container" style="color: black;text-align:center">
+                    <h4><b>Salir</b></h4>
+                    <p>Cerrar sesión.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-sm-4 mx-auto d-inline p-2">
+            <a class="card">
+                <div style="text-align:center"><br>
+                    <img src="../../assets/imagenes/logoBlanco.png" alt="Imagen" style="width:140px;">
+                </div><br>
+                <div class="container" style="color: black;text-align:center">
+                    <h4><b>Partido Verde</b></h4>
+                    <p>Derechos Reservados.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!--FIN FILA #2-->
+</div>

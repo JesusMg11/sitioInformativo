@@ -82,6 +82,7 @@
                     <div class="form-label mb-4">
                         <label style="margin-right: 5px;">Selecciona el Rol:   </label>
                         <select id="roles" name="rol" [(ngModel)]="nuevoUsuario.rol" required>
+                            <option value="" disabled checked>- Selecciona -</option>
                             <option *ngFor="let valores of roles" [ngValue]="valores.rol">
                                 {{ valores.nombreRol }}
                             </option>

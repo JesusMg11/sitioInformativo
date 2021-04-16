@@ -1,26 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #70e966;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="inicio()">Inicio</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
+<nav id="navUs" class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" (click)="inicio()"><img src="../../assets/imagenes/logoBlanco.png" width="50px" /></a>
+    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" (click)="informacion()">¿Quién Soy?</a>
-          <a class="nav-link" (click)="propuestas()">Propuestas</a>
-          <a class="nav-link" (click)="contacto()">Contacto</a>
-          <a class="nav-link" (click)="ingresar()">Ingresar</a>
-        </div>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" (click)="informacion()">¿Quién Soy?</a>
+        <a class="nav-link" (click)="propuestas()">Propuestas</a>
+        <a class="nav-link" (click)="contacto()">Contacto</a>
+        <!--<a class="nav-link" (click)="ingresar()">Ingresar</a>-->
       </div>
     </div>
-  </nav>
-  <br>
+  </div>
+</nav>

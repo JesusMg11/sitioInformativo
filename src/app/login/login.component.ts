@@ -13,6 +13,10 @@ export class LoginComponent implements OnInit {
   datosUsuario ={usuario : '', password:''};
   usuarioActivo = {id:'', nombre: '', apellidos:'', usuario:'', rol:''}
 
+  inicio(){
+    this.router.navigate(['/inicio']);
+  }
+
   login(){
     if(this.datosUsuario.usuario != '' || this.datosUsuario.usuario!= ''){
       this.datos.login(this.datosUsuario.usuario, this.datosUsuario.password).subscribe(resp => {
