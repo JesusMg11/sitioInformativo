@@ -32,7 +32,8 @@ switch($_SERVER['REQUEST_METHOD']){
                     'propuesta_pro'=> $_POST['propuesta'],
                     'imagen_pro'=> $imagen,
                     'titulo_pro'=> $_POST['titulo'],
-                    'tipo_img_pro' => $tipo
+                    'tipo_img_pro' => $tipo,
+                    'fecha_pro' => date("Y-m-d")
                     );
                    try{
                       $reg = $tabla->create($datos);

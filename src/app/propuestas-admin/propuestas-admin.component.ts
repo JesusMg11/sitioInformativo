@@ -3,11 +3,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { DatosService } from '../datos.service';
 import { ViewChild } from '@angular/core';
 import swal from 'sweetalert2';
-import {
-  Directive,
-  ElementRef,
-  Renderer2
-} from '@angular/core';
 
 @Component({
   selector: 'app-propuestas-admin',

@@ -1,2 +1,37 @@
 <app-menu></app-menu>
-<p>propuestas works!</p>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4" style="text-align: center;">
+            <h2>Conoce nuestras <b>Propuestas</b></h2>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+    <br>
+    <div class="row" *ngFor="let item of propuesta">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" >
+            <div class="single-blog">
+                <div class="single-blog-img">
+                    <a><img src="data:{{item.tipo_img_pro}};base64,{{item.imagen_pro}}"/></a>
+                </div>
+                <div class="blog-content-box">
+                    <div class="blog-post-date">
+                        <span>Fecha</span>
+                        <span>{{item.fecha_pro | date: 'mediumDate'}}</span>
+                    </div>
+                    <div class="blog-content">
+                        <h4><a>{{item.titulo_pro}}</a></h4>
+                        <div class="exerpt">
+                            {{item.propuesta_pro}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+<br>
+<app-footer></app-footer>

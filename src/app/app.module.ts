@@ -18,6 +18,7 @@ import { MensajesComponent } from './mensajes/mensajes.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { DatosService } from './datos.service';
 import { SeguridadGuard } from './seguridad.guard';
+import { FooterComponent } from './footer/footer.component';
 
 const rutas: Route[] = [
   {path:'', component: InicioComponent},
@@ -46,7 +47,8 @@ const rutas: Route[] = [
     PropuestasAdminComponent,
     UsuariosComponent,
     MensajesComponent,
-    MenuAdminComponent
+    MenuAdminComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
