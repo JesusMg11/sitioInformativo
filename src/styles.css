@@ -138,3 +138,9 @@ html{
     margin-bottom: 37px;
 }
 /*FIN DE ESTILOS DE MUESTRA DE PROPUESTA*/
+hr{
+    height:4px !important;
+    border-width:0;
+    color:green;
+    background-color:#30b135 !important;
+}
